@@ -29,7 +29,7 @@ Các chức năng thư viện, tìm bài báo, ghi chú, xuất dữ liệu, CSV
 
 ## Chức năng
 
-- Thư viện 177 kỹ năng: tìm kiếm, lọc lĩnh vực, yêu thích, đọc Markdown, mở tài liệu liên kết và tải mã nguồn.
+- Thư viện 177 kỹ năng: 12 nhóm thuộc 5 khối khoa học, bộ lọc liên ngành, tìm kiếm tiếng Việt có/không dấu, yêu thích, đọc Markdown và tải mã nguồn. Xem [nguyên tắc phân loại](docs/SCIENCE-TAXONOMY.md).
 - Tra cứu bài báo thật từ Europe PMC: DOI, tác giả, tóm tắt, năm xuất bản và nguồn trích dẫn.
 - Dự án: tạo/xóa, ghi chú tự lưu, gắn kỹ năng, lưu bài báo, nhập/xuất JSON, Markdown và BibTeX.
 - Đồng bộ nhiều thiết bị qua Redis REST, có hợp nhất phiên bản và kiểm tra cập nhật đồng thời. Đây là **một workspace dùng chung mật khẩu**, chưa phải hệ thống nhiều tài khoản riêng biệt.

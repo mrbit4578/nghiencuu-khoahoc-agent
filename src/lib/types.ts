@@ -4,6 +4,10 @@ export type Skill = {
   title: string;
   description: string;
   category: string;
+  groupId: string;
+  relatedGroupIds: string[];
+  classificationReason: string;
+  sourceCategory: string;
   compatibility: string;
   files: string[];
   scripts: number;
@@ -16,6 +20,16 @@ export type Catalog = {
   fileCount: number;
   version: string;
   categories: string[];
+  families: { id: string; label: string }[];
+  groups: ScienceGroup[];
+};
+export type ScienceGroup = {
+  id: string;
+  label: string;
+  family: string;
+  icon: string;
+  description: string;
+  count: number;
 };
 export type Paper = {
   id: string;

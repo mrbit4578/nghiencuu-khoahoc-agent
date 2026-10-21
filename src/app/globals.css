@@ -2608,3 +2608,52 @@ hr {
     font-size: 16px;
   }
 }
+
+/* Scientific taxonomy directory */
+.science-directory { margin: 25px 0; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.science-directory-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.science-directory-heading h2 { font-size: 19px; margin: 0; }
+.science-directory-heading > span { font-size: 11px; color: var(--muted); }
+.science-families { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+.science-families button { border: 1px solid var(--line); border-radius: 20px; padding: 8px 12px; background: var(--surface); font-size: 12px; }
+.science-families button[aria-pressed="true"] { color: white; background: var(--teal-dark); border-color: var(--teal-dark); }
+.science-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.science-group { display: flex; align-items: center; gap: 12px; text-align: left; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); padding: 15px 12px; min-width: 0; }
+.science-group:hover, .science-group[aria-pressed="true"] { background: var(--mint); border-color: var(--teal); }
+.science-group-icon { color: var(--teal); display: flex; flex-shrink: 0; }
+.science-group-copy { flex: 1; min-width: 0; }
+.science-group-copy strong { display: block; font-size: 12px; font-weight: 600; line-height: 1.45; }
+.science-group-copy small { color: var(--muted); font-size: 11px; }
+.science-group > svg { color: var(--muted); flex-shrink: 0; }
+.taxonomy-options { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 18px; font-size: 12px; margin-top: 14px; }
+.taxonomy-options label { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.taxonomy-options input { accent-color: var(--teal); width: 16px; height: 16px; }
+.taxonomy-options > span { font-size: 11px; color: var(--muted); }
+.taxonomy-options button { margin-left: auto; }
+.science-results { margin: 0 0 32px; }
+.science-results-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 17px; }
+.science-results-heading .skill-icon { flex-shrink: 0; }
+.science-results-heading h2 { font-size: 20px; margin: 0 0 4px; }
+.science-results-heading h2 > span { font: 12px Inter, "Segoe UI", sans-serif; color: var(--teal); background: var(--mint); padding: 3px 8px; border-radius: 12px; vertical-align: middle; }
+.science-results-heading p { font-size: 12px; margin: 0; }
+.category-label { letter-spacing: .04em; line-height: 1.6; font-size: 10px; }
+.classification-details { color: var(--muted); font-size: 11px; margin: 2px 0 13px; }
+.classification-details summary { color: var(--teal); cursor: pointer; width: fit-content; padding: 4px 0; }
+.classification-details p { margin: 8px 0; line-height: 1.7; }
+.related-fields { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.related-fields button { font-size: 10px; border: 1px solid var(--line); border-radius: 6px; padding: 4px 7px; background: var(--mint); color: var(--teal-dark); }
+@media (max-width: 1100px) { .science-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .science-directory { padding: 16px; }
+  .science-directory-heading h2 { font-size: 18px; }
+  .science-families button { min-height: 40px; font-size: 11px; }
+  .science-group { gap: 9px; padding: 12px 10px; }
+  .science-group-copy strong { font-size: 12px; }
+  .science-group > svg { display: none; }
+  .science-results-heading h2 { font-size: 19px; }
+  .science-results-heading p { font-size: 11px; }
+  .classification-details summary { padding: 9px 0; }
+  .related-fields button { min-height: 35px; }
+  .taxonomy-options label { min-height: 35px; }
+}
+@media (max-width: 430px) { .science-groups { grid-template-columns: 1fr; } }

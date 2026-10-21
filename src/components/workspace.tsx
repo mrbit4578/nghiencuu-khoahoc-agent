@@ -2,6 +2,16 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   Activity,
+  Atom,
+  BrainCircuit,
+  ChartNoAxesCombined,
+  Compass,
+  Dna,
+  Earth,
+  HeartPulse,
+  Server,
+  Settings,
+  Sigma,
   ArrowDownToLine,
   ArrowRight,
   Beaker,
@@ -36,8 +46,19 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Papa from "papaparse";
 import { describe, sequenceStats } from "@/lib/analysis";
+import { filterSkills } from "@/lib/skill-filters";
 import { projectsSchema } from "@/lib/projects";
 import type { Catalog, Paper, Project, Skill } from "@/lib/types";
+
+const scienceIcons: Record<string, typeof Microscope> = {
+  flask: FlaskConical, dna: Dna, atom: Atom, earth: Earth, heart: HeartPulse,
+  sigma: Sigma, brain: BrainCircuit, gear: Settings, chart: ChartNoAxesCombined,
+  compass: Compass, book: BookOpen, server: Server,
+};
+function ScienceIcon({ icon, size = 21 }: { icon?: string; size?: number }) {
+  const Icon = scienceIcons[icon || ""] || Microscope;
+  return <Icon size={size} aria-hidden="true" />;
+}
 
 type Tab =
   "home" | "library" | "papers" | "assistant" | "projects" | "tools" | "audit";
@@ -152,6 +173,8 @@ export default function Workspace() {
   const [toast, setToast] = useState("");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
+  const [family, setFamily] = useState("all");
+  const [includeRelated, setIncludeRelated] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [favoritesOnly, setFavoritesOnly] = useState(false);
@@ -467,15 +490,18 @@ export default function Workspace() {
       error: (e) => setToolError(e.message),
     });
   };
-  const filtered =
-    catalog?.skills.filter(
-      (s) =>
-        (category === "all" || s.category === category) &&
-        (!favoritesOnly || favorites.includes(s.id)) &&
-        `${s.id} ${s.title} ${s.description} ${s.category}`
-          .toLocaleLowerCase()
-          .includes(query.toLocaleLowerCase()),
-    ) || [];
+  const filtered = filterSkills(catalog, {
+    query, family, group: category, includeRelated, favoritesOnly, favorites,
+  });
+  const visibleGroups = catalog?.groups.filter((g) => family === "all" || g.family === family) || [];
+  const chooseGroup = (id: string) => {
+    setCategory(id);
+    if (id !== "all") setFamily(catalog?.groups.find((g) => g.id === id)?.family || "all");
+  };
+  const resetLibrary = () => {
+    setQuery(""); setFamily("all"); setCategory("all");
+    setFavoritesOnly(false); setIncludeRelated(false);
+  };
   const filteredFiles = files.filter((f) =>
     f.toLowerCase().includes(fileQuery.toLowerCase()),
   );
@@ -483,7 +509,7 @@ export default function Workspace() {
     <article className="skill-card" key={s.id}>
       <div className="card-top">
         <span className="skill-icon">
-          <Microscope size={21} />
+          <ScienceIcon icon={catalog?.groups.find((g) => g.id === s.groupId)?.icon} />
         </span>
         <button
           className={
@@ -502,6 +528,16 @@ export default function Workspace() {
       <span className="eyebrow category-label">{s.category}</span>
       <h3>{s.title.replace(/[*`]/g, "")}</h3>
       <p className="skill-description">{s.description}</p>
+      <details className="classification-details">
+        <summary>Phân loại{Boolean(s.relatedGroupIds.length) && " · Liên ngành"}</summary>
+        <p>{s.classificationReason}</p>
+        {Boolean(s.relatedGroupIds.length) && <div className="related-fields">
+          <span>Liên quan:</span>
+          {s.relatedGroupIds.map((id) => <button key={id} onClick={() => {
+            chooseGroup(id); setIncludeRelated(true); go("library");
+          }}>{catalog?.groups.find((g) => g.id === id)?.label}</button>)}
+        </div>}
+      </details>
       <div className="skill-meta">
         <span>
           <Files size={13} />
@@ -851,47 +887,70 @@ export default function Workspace() {
                   làm ngữ cảnh cho trợ lý.
                 </p>
               </div>
+              <section className="science-directory" aria-label="Nhóm khoa học">
+                <div className="science-directory-heading">
+                  <h2>Khám phá theo nhóm khoa học</h2>
+                  <span>{catalog?.groups.length || 12} nhóm · Mỗi kỹ năng có một nhóm chính</span>
+                </div>
+                <div className="science-families" aria-label="Khối khoa học">
+                  <button aria-pressed={family === "all"} onClick={() => { setFamily("all"); setCategory("all"); }}>Tất cả</button>
+                  {catalog?.families.map((f) => <button key={f.id} aria-pressed={family === f.id}
+                    onClick={() => { setFamily(f.id); setCategory("all"); }}>{f.label}</button>)}
+                </div>
+                <div className="science-groups">
+                  {visibleGroups.map((g) => <button key={g.id} className="science-group"
+                    aria-pressed={category === g.id} title={g.description}
+                    onClick={() => chooseGroup(category === g.id ? "all" : g.id)}>
+                    <span className="science-group-icon"><ScienceIcon icon={g.icon} /></span>
+                    <span className="science-group-copy"><strong>{g.label}</strong><small>{g.count} kỹ năng chính</small></span>
+                    <ChevronRight size={16} />
+                  </button>)}
+                </div>
+              </section>
               <div className="filter-bar">
                 <label className="search-field">
                   <Search size={19} />
-                  <input
-                    placeholder="Tìm tên kỹ năng, công cụ hoặc lĩnh vực…"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                  />
+                  <input aria-label="Tìm kỹ năng" placeholder="Tìm kỹ năng, công cụ hoặc lĩnh vực (có hoặc không dấu)…"
+                    value={query} onChange={(e) => setQuery(e.target.value)} />
                 </label>
-                <select
-                  aria-label="Lĩnh vực"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <option value="all">Tất cả lĩnh vực</option>
-                  {catalog?.categories.map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
+                <select aria-label="Nhóm khoa học" value={category} onChange={(e) => chooseGroup(e.target.value)}>
+                  <option value="all">{family === "all" ? "Tất cả nhóm khoa học" : "Tất cả nhóm trong khối"}</option>
+                  {catalog?.families.filter((f) => family === "all" || f.id === family).map((f) =>
+                    <optgroup key={f.id} label={f.label}>
+                      {catalog.groups.filter((g) => g.family === f.id).map((g) => <option key={g.id} value={g.id}>{g.label} ({g.count})</option>)}
+                    </optgroup>)}
                 </select>
-                <button
-                  className={
-                    "button secondary " + (favoritesOnly ? "selected" : "")
-                  }
-                  onClick={() => setFavoritesOnly(!favoritesOnly)}
-                >
-                  <Star size={16} />
-                  Đã lưu ({favorites.length})
+                <button className={"button secondary " + (favoritesOnly ? "selected" : "")}
+                  aria-pressed={favoritesOnly} onClick={() => setFavoritesOnly(!favoritesOnly)}>
+                  <Star size={16} />Đã lưu ({favorites.length})
                 </button>
               </div>
-              <div className="results-line">
-                <span>{filtered.length} kỹ năng phù hợp</span>
+              <div className="taxonomy-options">
+                <label><input type="checkbox" checked={includeRelated} onChange={(e) => setIncludeRelated(e.target.checked)} />Bao gồm kỹ năng liên ngành</label>
+                <span>Đếm theo nhóm chính; nhãn liên ngành giúp tìm thêm kỹ năng liên quan.</span>
+                {(query || family !== "all" || category !== "all" || favoritesOnly || includeRelated) &&
+                  <button className="text-button" onClick={resetLibrary}>Xóa bộ lọc</button>}
+              </div>
+              <div className="results-line" aria-live="polite">
+                <span>{filtered.length} kỹ năng phù hợp{includeRelated && (category !== "all" || family !== "all") ? " · gồm liên ngành" : ""}</span>
                 <button className="text-button" onClick={() => go("assistant")}>
                   Đã chọn {selected.length}/4 <ArrowRight size={14} />
                 </button>
               </div>
-              <div className="skills-grid">{filtered.map(skillCard)}</div>
+              {catalog?.groups.filter((g) => filtered.some((s) => s.groupId === g.id)).map((g) => (
+                <section key={g.id} className="science-results" aria-labelledby={"group-" + g.id}>
+                  <div className="science-results-heading">
+                    <span className="skill-icon"><ScienceIcon icon={g.icon} /></span>
+                    <div><h2 id={"group-" + g.id}>{g.label} <span>{filtered.filter((s) => s.groupId === g.id).length}</span></h2><p>{g.description}</p></div>
+                  </div>
+                  <div className="skills-grid">{filtered.filter((s) => s.groupId === g.id).map(skillCard)}</div>
+                </section>
+              ))}
               {!filtered.length && (
                 <div className="empty-state">
-                  <Search size={32} />
-                  <h3>Chưa tìm thấy kỹ năng</h3>
-                  <p>Thử từ khóa khác hoặc chọn tất cả lĩnh vực.</p>
+                  <Search size={32} /><h3>Chưa tìm thấy kỹ năng</h3>
+                  <p>Thử từ khóa khác, bật liên ngành hoặc xóa bộ lọc.</p>
+                  <button className="button secondary" onClick={resetLibrary}>Xóa bộ lọc</button>
                 </div>
               )}
             </>

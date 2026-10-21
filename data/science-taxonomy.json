@@ -1,0 +1,858 @@
+{
+  "version": 1,
+  "reviewed": "2026-10-21",
+  "basis": "Phân loại theo đối tượng nghiên cứu và chức năng chính trong SKILL.md; nhóm chính duy nhất, liên ngành là nhãn bổ sung. Đây là hệ thống điều hướng thư viện, không phải đánh giá chất lượng khoa học.",
+  "families": [
+    {
+      "id": "natural",
+      "label": "Khoa học tự nhiên"
+    },
+    {
+      "id": "health",
+      "label": "Y dược & sức khỏe"
+    },
+    {
+      "id": "computational",
+      "label": "Toán, tính toán & kỹ thuật"
+    },
+    {
+      "id": "social",
+      "label": "Kinh tế & khoa học xã hội"
+    },
+    {
+      "id": "research",
+      "label": "Hỗ trợ nghiên cứu liên ngành"
+    }
+  ],
+  "groups": [
+    {
+      "id": "chemistry",
+      "label": "Hóa học & vật liệu",
+      "family": "natural",
+      "icon": "flask",
+      "description": "Hợp chất, phản ứng, phổ phân tích, hóa tin học, hóa dược và đặc tính vật liệu.",
+      "skills": [
+        "analytical-method-validation",
+        "cantera",
+        "datamol",
+        "deepchem",
+        "diffdock",
+        "matchms",
+        "medchem",
+        "molfeat",
+        "nmrglue",
+        "pycalphad",
+        "pymatgen",
+        "rdkit",
+        "rowan",
+        "torchdrug"
+      ]
+    },
+    {
+      "id": "biology",
+      "label": "Sinh học & công nghệ sinh học",
+      "family": "natural",
+      "icon": "dna",
+      "description": "Gene, tế bào, protein, vi sinh, tiến hóa, sinh học hệ thống và khoa học thần kinh cơ bản.",
+      "skills": [
+        "13c-metabolic-flux",
+        "adaptyv",
+        "alphagenome",
+        "anndata",
+        "arboreto",
+        "bids",
+        "biopython",
+        "bioservices",
+        "bulk-rnaseq",
+        "cellprofiler",
+        "cellxgene-census",
+        "cobrapy",
+        "deepspot-m",
+        "deeptools",
+        "depmap",
+        "esm",
+        "etetoolkit",
+        "flowio",
+        "flowkit",
+        "geniml",
+        "genomic-coordinates",
+        "genomic-intelligence",
+        "gget",
+        "glycoengineering",
+        "gtars",
+        "mageck",
+        "molecular-dynamics",
+        "neuropixels-analysis",
+        "nwb-conversion",
+        "onekgpd",
+        "pacsomatic",
+        "pathway-enrichment",
+        "phylogenetics",
+        "polars-bio",
+        "primer-design",
+        "pydeseq2",
+        "pyopenms",
+        "pysam",
+        "qiime2-amplicon",
+        "relion",
+        "relsa-severity-assessment",
+        "scanpy",
+        "scikit-bio",
+        "scvelo",
+        "scvi-tools",
+        "tamarind",
+        "tellurium",
+        "tiledbvcf",
+        "waypoint-bio"
+      ]
+    },
+    {
+      "id": "physics",
+      "label": "Vật lý & thiên văn học",
+      "family": "natural",
+      "icon": "atom",
+      "description": "Thiên văn, vật lý lượng tử, động lực học chất lưu và phép đo dòng chảy.",
+      "skills": [
+        "astropy",
+        "cirq",
+        "fluidsim",
+        "openpiv",
+        "pennylane",
+        "qiskit",
+        "qutip"
+      ]
+    },
+    {
+      "id": "earth",
+      "label": "Trái Đất, môi trường & địa lý",
+      "family": "natural",
+      "icon": "earth",
+      "description": "Dữ liệu không gian, viễn thám, hải dương học và hóa học môi trường biển.",
+      "skills": [
+        "geomaster",
+        "geopandas",
+        "marine-carbonate-chemistry"
+      ]
+    },
+    {
+      "id": "medicine",
+      "label": "Y học & dược học",
+      "family": "health",
+      "icon": "heart",
+      "description": "Nghiên cứu sức khỏe, hình ảnh y sinh, bệnh học, dịch tễ, dược động học và dữ liệu thuốc.",
+      "skills": [
+        "clinical-decision-support",
+        "clinical-reports",
+        "folklore-variant-evidence",
+        "histolab",
+        "imaging-data-commons",
+        "ncats-arax",
+        "neurokit2",
+        "pathml",
+        "pathogen-variant-surveillance",
+        "pkpd-modeling",
+        "primekg",
+        "pydicom",
+        "pyhealth",
+        "pytdc",
+        "treatment-plans"
+      ]
+    },
+    {
+      "id": "mathematics",
+      "label": "Toán học & thống kê",
+      "family": "computational",
+      "icon": "sigma",
+      "description": "Toán ký hiệu, tính toán số, lý thuyết đồ thị, tối ưu, suy luận thống kê và độ không đảm bảo đo.",
+      "skills": [
+        "matlab",
+        "networkx",
+        "pymc",
+        "pymoo",
+        "scikit-survival",
+        "statistical-analysis",
+        "statistical-power",
+        "statsmodels",
+        "sympy",
+        "uncertainty-and-units"
+      ]
+    },
+    {
+      "id": "data-ai",
+      "label": "Khoa học dữ liệu & AI",
+      "family": "computational",
+      "icon": "brain",
+      "description": "Xử lý dữ liệu, học máy, mô hình AI, dự báo, giải thích mô hình và trực quan hóa dữ liệu.",
+      "skills": [
+        "aeon",
+        "dask",
+        "exploratory-data-analysis",
+        "matplotlib",
+        "polars",
+        "pufferlib",
+        "pytorch-lightning",
+        "scikit-learn",
+        "seaborn",
+        "shap",
+        "stable-baselines3",
+        "timesfm-forecasting",
+        "torch-geometric",
+        "transformers",
+        "umap-learn",
+        "vaex"
+      ]
+    },
+    {
+      "id": "engineering",
+      "label": "Kỹ thuật & mô phỏng",
+      "family": "computational",
+      "icon": "gear",
+      "description": "Thiết kế CAD, chế tạo, mô hình thiết bị, pin điện hóa và mô phỏng hệ thống kỹ thuật.",
+      "skills": [
+        "fictiv",
+        "lab-hardware-cad",
+        "pybamm",
+        "simpy"
+      ]
+    },
+    {
+      "id": "economics",
+      "label": "Kinh tế & khoa học xã hội",
+      "family": "social",
+      "icon": "chart",
+      "description": "Nghiên cứu thị trường, dữ liệu tài khóa, tài chính công và phân tích ngành kinh tế.",
+      "skills": [
+        "market-research-reports",
+        "usfiscaldata"
+      ]
+    },
+    {
+      "id": "methodology",
+      "label": "Phương pháp & đánh giá nghiên cứu",
+      "family": "research",
+      "icon": "compass",
+      "description": "Thiết kế nghiên cứu, giả thuyết, tổng quan bằng chứng, phản biện, đánh giá và bảo đảm chất lượng.",
+      "skills": [
+        "arbor",
+        "consciousness-council",
+        "dhdna-profiler",
+        "experimental-design",
+        "hypogenic",
+        "hypothesis-generation",
+        "iso-standards-readiness",
+        "literature-review",
+        "peer-review",
+        "research-grants",
+        "scholar-evaluation",
+        "scientific-brainstorming",
+        "scientific-critical-thinking",
+        "what-if-oracle"
+      ]
+    },
+    {
+      "id": "communication",
+      "label": "Tài liệu & công bố khoa học",
+      "family": "research",
+      "icon": "book",
+      "description": "Tìm tài liệu, quản lý trích dẫn, đọc/chuyển đổi tài liệu, viết báo cáo, sơ đồ, poster và trình bày khoa học.",
+      "skills": [
+        "bgpt-paper-search",
+        "citation-management",
+        "exa-search",
+        "generate-image",
+        "infographics",
+        "latex-posters",
+        "liteparse",
+        "markdown-mermaid-writing",
+        "markitdown",
+        "paper-lookup",
+        "paperclip",
+        "paperzilla",
+        "parallel-web",
+        "pptx-posters",
+        "pyzotero",
+        "research-lookup",
+        "scientific-schematics",
+        "scientific-slides",
+        "scientific-visualization",
+        "scientific-writing",
+        "venue-templates"
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "label": "Hạ tầng dữ liệu & phòng thí nghiệm",
+      "family": "research",
+      "icon": "server",
+      "description": "Lưu trữ, quản lý dữ liệu, luồng công việc, tính toán, nền tảng nghiên cứu và tự động hóa phòng thí nghiệm.",
+      "skills": [
+        "autoskill",
+        "benchling-integration",
+        "database-lookup",
+        "datalad",
+        "dnanexus-integration",
+        "get-available-resources",
+        "ginkgo-cloud-lab",
+        "hugging-science",
+        "labarchive-integration",
+        "lamindb",
+        "latchbio-integration",
+        "modal",
+        "nextflow",
+        "omero-integration",
+        "open-notebook",
+        "opentrons-integration",
+        "optimize-for-gpu",
+        "ontology-term-resolution",
+        "pi-agent",
+        "protocolsio-integration",
+        "pylabrobot",
+        "zarr-python"
+      ]
+    }
+  ],
+  "crossDisciplinary": {
+    "datamol": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "deepchem": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "diffdock": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "medchem": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "molfeat": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "rdkit": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "rowan": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "torchdrug": {
+      "relatedGroups": [
+        "medicine",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là phân tử/hợp chất và đặc tính hóa học; ứng dụng liên ngành trong phát hiện thuốc và tương tác sinh học."
+    },
+    "analytical-method-validation": {
+      "relatedGroups": [
+        "biology",
+        "medicine",
+        "methodology"
+      ],
+      "reason": "Thẩm định phương pháp đo hóa phân tích và assay; có ứng dụng trong xét nghiệm sinh học, dược và bảo đảm chất lượng."
+    },
+    "cantera": {
+      "relatedGroups": [
+        "engineering",
+        "physics"
+      ],
+      "reason": "Mô hình phản ứng và động học hóa học; liên quan thiết kế quá trình, cháy và nhiệt động lực học."
+    },
+    "nmrglue": {
+      "relatedGroups": [
+        "physics"
+      ],
+      "reason": "Xử lý phổ NMR để phân tích hóa học; phương pháp đo dựa trên vật lý cộng hưởng từ."
+    },
+    "pycalphad": {
+      "relatedGroups": [
+        "physics",
+        "engineering"
+      ],
+      "reason": "Tính chất, cấu trúc và cân bằng pha của vật liệu; giao thoa hóa học, vật lý chất rắn và kỹ thuật vật liệu."
+    },
+    "pymatgen": {
+      "relatedGroups": [
+        "physics",
+        "engineering"
+      ],
+      "reason": "Tính chất, cấu trúc và cân bằng pha của vật liệu; giao thoa hóa học, vật lý chất rắn và kỹ thuật vật liệu."
+    },
+    "matchms": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Xử lý và so khớp phổ khối để nghiên cứu phân tử; dùng cả trong chuyển hóa học và phân tích sinh học."
+    },
+    "13c-metabolic-flux": {
+      "relatedGroups": [
+        "chemistry",
+        "mathematics"
+      ],
+      "reason": "Đối tượng là mạng chuyển hóa/phản ứng sinh hóa; mô hình toán và hóa học phục vụ câu hỏi sinh học hệ thống."
+    },
+    "cobrapy": {
+      "relatedGroups": [
+        "chemistry",
+        "mathematics"
+      ],
+      "reason": "Đối tượng là mạng chuyển hóa/phản ứng sinh hóa; mô hình toán và hóa học phục vụ câu hỏi sinh học hệ thống."
+    },
+    "tellurium": {
+      "relatedGroups": [
+        "chemistry",
+        "mathematics"
+      ],
+      "reason": "Đối tượng là mạng chuyển hóa/phản ứng sinh hóa; mô hình toán và hóa học phục vụ câu hỏi sinh học hệ thống."
+    },
+    "adaptyv": {
+      "relatedGroups": [
+        "chemistry"
+      ],
+      "reason": "Đặc trưng, thiết kế hoặc biến đổi protein; có giao thoa hóa sinh và tương tác phân tử."
+    },
+    "glycoengineering": {
+      "relatedGroups": [
+        "chemistry"
+      ],
+      "reason": "Đặc trưng, thiết kế hoặc biến đổi protein; có giao thoa hóa sinh và tương tác phân tử."
+    },
+    "esm": {
+      "relatedGroups": [
+        "chemistry"
+      ],
+      "reason": "Đặc trưng, thiết kế hoặc biến đổi protein; có giao thoa hóa sinh và tương tác phân tử."
+    },
+    "tamarind": {
+      "relatedGroups": [
+        "chemistry"
+      ],
+      "reason": "Đặc trưng, thiết kế hoặc biến đổi protein; có giao thoa hóa sinh và tương tác phân tử."
+    },
+    "alphagenome": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng chính là hệ gene hoặc dữ liệu sinh học; AI là phương pháp phân tích, không thay thế lĩnh vực ứng dụng chính."
+    },
+    "arboreto": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng chính là hệ gene hoặc dữ liệu sinh học; AI là phương pháp phân tích, không thay thế lĩnh vực ứng dụng chính."
+    },
+    "geniml": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng chính là hệ gene hoặc dữ liệu sinh học; AI là phương pháp phân tích, không thay thế lĩnh vực ứng dụng chính."
+    },
+    "genomic-intelligence": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng chính là hệ gene hoặc dữ liệu sinh học; AI là phương pháp phân tích, không thay thế lĩnh vực ứng dụng chính."
+    },
+    "scvi-tools": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng chính là hệ gene hoặc dữ liệu sinh học; AI là phương pháp phân tích, không thay thế lĩnh vực ứng dụng chính."
+    },
+    "waypoint-bio": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng chính là hệ gene hoặc dữ liệu sinh học; AI là phương pháp phân tích, không thay thế lĩnh vực ứng dụng chính."
+    },
+    "bids": {
+      "relatedGroups": [
+        "medicine",
+        "data-ai"
+      ],
+      "reason": "Nghiên cứu hình ảnh, cấu trúc hoặc cơ chế sinh học với ứng dụng y sinh và các phương pháp tính toán."
+    },
+    "deepspot-m": {
+      "relatedGroups": [
+        "medicine",
+        "data-ai"
+      ],
+      "reason": "Nghiên cứu hình ảnh, cấu trúc hoặc cơ chế sinh học với ứng dụng y sinh và các phương pháp tính toán."
+    },
+    "depmap": {
+      "relatedGroups": [
+        "medicine",
+        "data-ai"
+      ],
+      "reason": "Nghiên cứu hình ảnh, cấu trúc hoặc cơ chế sinh học với ứng dụng y sinh và các phương pháp tính toán."
+    },
+    "pacsomatic": {
+      "relatedGroups": [
+        "medicine",
+        "data-ai"
+      ],
+      "reason": "Nghiên cứu hình ảnh, cấu trúc hoặc cơ chế sinh học với ứng dụng y sinh và các phương pháp tính toán."
+    },
+    "relion": {
+      "relatedGroups": [
+        "medicine",
+        "data-ai"
+      ],
+      "reason": "Nghiên cứu hình ảnh, cấu trúc hoặc cơ chế sinh học với ứng dụng y sinh và các phương pháp tính toán."
+    },
+    "molecular-dynamics": {
+      "relatedGroups": [
+        "chemistry",
+        "physics"
+      ],
+      "reason": "Mô phỏng hệ protein/phân tử sinh học bằng lực trường và động lực học phân tử."
+    },
+    "pyopenms": {
+      "relatedGroups": [
+        "chemistry"
+      ],
+      "reason": "Phân tích proteomics và metabolomics từ LC-MS/MS; kết hợp câu hỏi sinh học với hóa phân tích."
+    },
+    "relsa-severity-assessment": {
+      "relatedGroups": [
+        "medicine",
+        "mathematics"
+      ],
+      "reason": "Đánh giá mức độ ảnh hưởng và phúc lợi động vật nghiên cứu bằng chỉ số và mô hình thống kê."
+    },
+    "pennylane": {
+      "relatedGroups": [
+        "data-ai",
+        "mathematics"
+      ],
+      "reason": "Mạch và thuật toán lượng tử là đối tượng chính; có ứng dụng học máy lượng tử và tối ưu biến phân."
+    },
+    "cirq": {
+      "relatedGroups": [
+        "engineering"
+      ],
+      "reason": "Thiết kế và thực thi mạch lượng tử; thuộc tính toán lượng tử và liên quan phần cứng kỹ thuật."
+    },
+    "qiskit": {
+      "relatedGroups": [
+        "engineering"
+      ],
+      "reason": "Thiết kế và thực thi mạch lượng tử; thuộc tính toán lượng tử và liên quan phần cứng kỹ thuật."
+    },
+    "fluidsim": {
+      "relatedGroups": [
+        "engineering"
+      ],
+      "reason": "Đối tượng chính là trường vận tốc/dòng chảy và động lực học chất lưu; ứng dụng trong mô phỏng và thí nghiệm kỹ thuật."
+    },
+    "openpiv": {
+      "relatedGroups": [
+        "engineering"
+      ],
+      "reason": "Đối tượng chính là trường vận tốc/dòng chảy và động lực học chất lưu; ứng dụng trong mô phỏng và thí nghiệm kỹ thuật."
+    },
+    "marine-carbonate-chemistry": {
+      "relatedGroups": [
+        "chemistry"
+      ],
+      "reason": "Cân bằng carbonate của nước biển phục vụ hải dương học và nghiên cứu acid hóa đại dương."
+    },
+    "geomaster": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng là không gian địa lý và quan trắc Trái Đất; dùng công cụ dữ liệu và thống kê không gian."
+    },
+    "geopandas": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Đối tượng là không gian địa lý và quan trắc Trái Đất; dùng công cụ dữ liệu và thống kê không gian."
+    },
+    "folklore-variant-evidence": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Mối liên hệ gene, biến thể, tác nhân gây bệnh hoặc mạng tri thức y sinh phục vụ nghiên cứu bệnh và sức khỏe."
+    },
+    "pathogen-variant-surveillance": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Mối liên hệ gene, biến thể, tác nhân gây bệnh hoặc mạng tri thức y sinh phục vụ nghiên cứu bệnh và sức khỏe."
+    },
+    "primekg": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Mối liên hệ gene, biến thể, tác nhân gây bệnh hoặc mạng tri thức y sinh phục vụ nghiên cứu bệnh và sức khỏe."
+    },
+    "ncats-arax": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Mối liên hệ gene, biến thể, tác nhân gây bệnh hoặc mạng tri thức y sinh phục vụ nghiên cứu bệnh và sức khỏe."
+    },
+    "histolab": {
+      "relatedGroups": [
+        "data-ai",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là dữ liệu/hình ảnh y sinh và bệnh học; sử dụng xử lý ảnh, dữ liệu hoặc AI."
+    },
+    "imaging-data-commons": {
+      "relatedGroups": [
+        "data-ai",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là dữ liệu/hình ảnh y sinh và bệnh học; sử dụng xử lý ảnh, dữ liệu hoặc AI."
+    },
+    "pathml": {
+      "relatedGroups": [
+        "data-ai",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là dữ liệu/hình ảnh y sinh và bệnh học; sử dụng xử lý ảnh, dữ liệu hoặc AI."
+    },
+    "pydicom": {
+      "relatedGroups": [
+        "data-ai",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là dữ liệu/hình ảnh y sinh và bệnh học; sử dụng xử lý ảnh, dữ liệu hoặc AI."
+    },
+    "pyhealth": {
+      "relatedGroups": [
+        "data-ai",
+        "biology"
+      ],
+      "reason": "Đối tượng chính là dữ liệu/hình ảnh y sinh và bệnh học; sử dụng xử lý ảnh, dữ liệu hoặc AI."
+    },
+    "pkpd-modeling": {
+      "relatedGroups": [
+        "chemistry",
+        "mathematics"
+      ],
+      "reason": "Đối tượng là phơi nhiễm thuốc và đáp ứng dược lý, được mô hình hóa bằng phương trình và thống kê."
+    },
+    "pytdc": {
+      "relatedGroups": [
+        "chemistry",
+        "data-ai"
+      ],
+      "reason": "Dữ liệu và benchmark cho phát triển liệu pháp/thuốc; kết hợp khoa học dược, mô hình phân tử và học máy."
+    },
+    "matlab": {
+      "relatedGroups": [
+        "engineering",
+        "data-ai"
+      ],
+      "reason": "Công cụ toán học/tính toán tổng quát, dùng cho nhiều lĩnh vực kỹ thuật và khoa học dữ liệu."
+    },
+    "networkx": {
+      "relatedGroups": [
+        "engineering",
+        "data-ai"
+      ],
+      "reason": "Công cụ toán học/tính toán tổng quát, dùng cho nhiều lĩnh vực kỹ thuật và khoa học dữ liệu."
+    },
+    "pymoo": {
+      "relatedGroups": [
+        "engineering",
+        "data-ai"
+      ],
+      "reason": "Công cụ toán học/tính toán tổng quát, dùng cho nhiều lĩnh vực kỹ thuật và khoa học dữ liệu."
+    },
+    "sympy": {
+      "relatedGroups": [
+        "engineering",
+        "data-ai"
+      ],
+      "reason": "Công cụ toán học/tính toán tổng quát, dùng cho nhiều lĩnh vực kỹ thuật và khoa học dữ liệu."
+    },
+    "pymc": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Ước lượng, mô hình xác suất hoặc phân tích sống còn; nền tảng toán-thống kê với các ứng dụng học máy."
+    },
+    "statsmodels": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Ước lượng, mô hình xác suất hoặc phân tích sống còn; nền tảng toán-thống kê với các ứng dụng học máy."
+    },
+    "scikit-survival": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Ước lượng, mô hình xác suất hoặc phân tích sống còn; nền tảng toán-thống kê với các ứng dụng học máy."
+    },
+    "uncertainty-and-units": {
+      "relatedGroups": [
+        "physics",
+        "chemistry"
+      ],
+      "reason": "Đơn vị và độ không đảm bảo đo dùng chung trong các phép đo và tính toán khoa học thực nghiệm."
+    },
+    "pybamm": {
+      "relatedGroups": [
+        "chemistry",
+        "physics"
+      ],
+      "reason": "Đối tượng chính là pin và chu trình vận hành thiết bị; mô hình kết hợp điện hóa, truyền tải và nhiệt động lực học."
+    },
+    "lab-hardware-cad": {
+      "relatedGroups": [
+        "biology",
+        "chemistry"
+      ],
+      "reason": "Thiết kế và chế tạo phần cứng phòng thí nghiệm; ứng dụng liên ngành, không chỉ phục vụ một ngành khoa học."
+    },
+    "arbor": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Phương pháp tạo/kiểm tra giả thuyết và tối ưu nghiên cứu, có dùng AI hoặc các bộ đánh giá tính toán."
+    },
+    "hypogenic": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Phương pháp tạo/kiểm tra giả thuyết và tối ưu nghiên cứu, có dùng AI hoặc các bộ đánh giá tính toán."
+    },
+    "literature-review": {
+      "relatedGroups": [
+        "communication"
+      ],
+      "reason": "Tổng hợp và đánh giá bằng chứng là phương pháp nghiên cứu; tìm kiếm, đọc và trích dẫn tài liệu là công cụ hỗ trợ."
+    },
+    "scientific-visualization": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Sản phẩm chính là hình khoa học để công bố và truyền đạt kết quả; công cụ dữ liệu phục vụ việc trình bày."
+    },
+    "benchling-integration": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Chức năng chính là quản lý/lưu trữ hoặc vận hành dữ liệu và luồng công việc, có ứng dụng chuyên sâu trong khoa học sự sống."
+    },
+    "dnanexus-integration": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Chức năng chính là quản lý/lưu trữ hoặc vận hành dữ liệu và luồng công việc, có ứng dụng chuyên sâu trong khoa học sự sống."
+    },
+    "lamindb": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Chức năng chính là quản lý/lưu trữ hoặc vận hành dữ liệu và luồng công việc, có ứng dụng chuyên sâu trong khoa học sự sống."
+    },
+    "latchbio-integration": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Chức năng chính là quản lý/lưu trữ hoặc vận hành dữ liệu và luồng công việc, có ứng dụng chuyên sâu trong khoa học sự sống."
+    },
+    "omero-integration": {
+      "relatedGroups": [
+        "biology"
+      ],
+      "reason": "Chức năng chính là quản lý/lưu trữ hoặc vận hành dữ liệu và luồng công việc, có ứng dụng chuyên sâu trong khoa học sự sống."
+    },
+    "ginkgo-cloud-lab": {
+      "relatedGroups": [
+        "biology",
+        "chemistry"
+      ],
+      "reason": "Nền tảng, giao thức hoặc thiết bị thí nghiệm có thể dùng cho cả quy trình sinh học và hóa học."
+    },
+    "opentrons-integration": {
+      "relatedGroups": [
+        "biology",
+        "chemistry"
+      ],
+      "reason": "Nền tảng, giao thức hoặc thiết bị thí nghiệm có thể dùng cho cả quy trình sinh học và hóa học."
+    },
+    "pylabrobot": {
+      "relatedGroups": [
+        "biology",
+        "chemistry"
+      ],
+      "reason": "Nền tảng, giao thức hoặc thiết bị thí nghiệm có thể dùng cho cả quy trình sinh học và hóa học."
+    },
+    "protocolsio-integration": {
+      "relatedGroups": [
+        "biology",
+        "chemistry"
+      ],
+      "reason": "Nền tảng, giao thức hoặc thiết bị thí nghiệm có thể dùng cho cả quy trình sinh học và hóa học."
+    },
+    "hugging-science": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Hạ tầng khám phá mô hình, tài nguyên và thực thi tính toán/AI dùng chung giữa các lĩnh vực nghiên cứu."
+    },
+    "optimize-for-gpu": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Hạ tầng khám phá mô hình, tài nguyên và thực thi tính toán/AI dùng chung giữa các lĩnh vực nghiên cứu."
+    },
+    "modal": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Hạ tầng khám phá mô hình, tài nguyên và thực thi tính toán/AI dùng chung giữa các lĩnh vực nghiên cứu."
+    },
+    "dhdna-profiler": {
+      "relatedGroups": [],
+      "reason": "Rubric thăm dò các mẫu lập luận trong văn bản; không coi đây là đo lường gene, thần kinh học hay chẩn đoán tâm lý đã được kiểm định."
+    },
+    "consciousness-council": {
+      "relatedGroups": [],
+      "reason": "Bài tập tổ chức góc nhìn và quyết định; không phải công cụ thực nghiệm nghiên cứu ý thức hoặc tâm lý học."
+    },
+    "zarr-python": {
+      "relatedGroups": [
+        "data-ai"
+      ],
+      "reason": "Lưu trữ mảng nhiều chiều và I/O tổng quát; dùng được trong sinh học nhưng bản chất không phải một công cụ sinh học chuyên biệt."
+    },
+    "astropy": {
+      "relatedGroups": [
+        "mathematics"
+      ],
+      "reason": "Tọa độ thiên thể, FITS, thời gian, đơn vị và vũ trụ học: đối tượng chính là thiên văn/vật lý thiên văn."
+    }
+  }
+}

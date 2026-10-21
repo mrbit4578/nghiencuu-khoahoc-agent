@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { parse } from "yaml";
 import { source, manifest, pool } from "./ensure-upstream.mjs";
+import { classifySkills } from "./science-taxonomy.mjs";
 const root = process.cwd();
 const doc = await fs.readFile(path.join(source, "docs/skills.md"), "utf8");
 let category = "Other";
@@ -43,13 +44,16 @@ for (const id of (await fs.readdir(path.join(source, "skills"))).sort()) {
 }
 await fs.mkdir(path.join(root, "data"), { recursive: true });
 await fs.mkdir(path.join(root, "public"), { recursive: true });
+const classified = classifySkills(skills, JSON.parse(
+  await fs.readFile(path.join(root, "data/science-taxonomy.json"), "utf8"),
+));
 const catalog = {
-  skills,
+  ...classified,
   fileCount: all.length,
   version: JSON.parse(
     await fs.readFile(path.join(source, "plugin.json"), "utf8"),
   ).version,
-  categories: [...new Set(skills.map((s) => s.category))].sort(),
+  categories: classified.groups.map((g) => g.label),
 };
 await fs.writeFile(
   path.join(root, "data/catalog.json"),
