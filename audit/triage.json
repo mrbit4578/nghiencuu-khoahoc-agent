@@ -1,0 +1,665 @@
+{
+  "reviewedCandidates": 84,
+  "findings": [
+    {
+      "severity": "review",
+      "path": "tests/benchling-integration/test_examples.py",
+      "line": 92,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    snippets = re.findall(r\"```python\\n(.*?)```\", path.read_text(), flags=re.S)\n    for index, snippet in enumerate(snippets):\n        exec(compile(snippet, f\"{path.name}:example-{index + 1}\", \"exec\"), scope)\n    return len(snippets)\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/biopython/test_examples.py",
+      "line": 36,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "\ndef run_block(filename, marker, **namespace):\n    exec(compile(block(filename, marker), filename, \"exec\"), namespace)\n    return namespace\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/biopython/test_examples.py",
+      "line": 43,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    code = block(filename, f\"def {name}(\")\n    node = next(n for n in ast.parse(code).body if isinstance(n, ast.FunctionDef) and n.name == name)\n    exec(compile(ast.Module(body=[node], type_ignores=[]), filename, \"exec\"), namespace)\n    return namespace[name]\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/cirq/test_examples.py",
+      "line": 167,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    namespace = {}\n    for index, code in enumerate(re.findall(r\"```python\\n(.*?)```\", text, flags=re.S)):\n        exec(compile(code, f\"SKILL.md:block{index}\", \"exec\"), namespace)\n    assert set(namespace[\"results\"]) == {0.0, 0.001, 0.01, 0.05, 0.1}\n    assert all(sum(row[\"histogram\"].values()) == 1000 for row in namespace[\"results\"].values())",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/cirq/test_examples.py",
+      "line": 24,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    for index, code in enumerate(blocks(reference)):\n        if indices is None or index in indices:\n            exec(compile(code, f\"{reference}:block{index}\", \"exec\"), namespace)\n    return namespace\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/dask/test_recipes.py",
+      "line": 25,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "def run(code, **variables):\n    namespace = {'np': np, 'dask': dask, 'da': da, 'dd': dd, 'db': db, **variables}\n    exec(compile(code, '<dask-recipe>', 'exec'), namespace)\n    return namespace\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/datamol/test_workflows.py",
+      "line": 19,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    for index, code in enumerate(blocks):\n        if index not in exclude:\n            exec(compile(code, f'{path.name}:block{index + 1}', 'exec'), namespace)\n    return namespace\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/flowio/test_api_behavior.py",
+      "line": 176,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    code = re.search(r\"```python\\n(.*?)```\", section, re.S).group(1)\n    with pytest.raises(ValueError, match=\"DATA shape disagrees\"):\n        exec(compile(code, \"workflows.md\", \"exec\"), {})\n    assert not Path(\"sample.events.csv\").exists()\n    assert not Path(\"sample.events.json\").exists()",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/geomaster/test_recipes.py",
+      "line": 21,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "        nodes=[n for n in tree.body if isinstance(n,(ast.FunctionDef,ast.ClassDef)) and n.name==name]\n        if nodes:\n            exec(compile(ast.Module(body=nodes,type_ignores=[]),str(file),'exec'),scope)\n            return scope[name]\n    raise AssertionError(f'{name} not found in {file}')",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/histolab/test_recipes.py",
+      "line": 34,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    assert match is not None, name\n    scope = dict(variables)\n    exec(compile(match[1], str(SKILL_ROOT / \"references\" / filename), \"exec\"), scope)\n    return scope\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/hugging-science/test_current_workflows.py",
+      "line": 34,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "         mock.patch.object(transformers.AutoModel, 'from_pretrained', return_value=model), \\\n         mock.patch('dotenv.load_dotenv', return_value=False):\n        exec(code_block('using-models.md', 'per_residue ='), namespace)\n    assert [x.shape for x in namespace['per_residue']] == [torch.Size([10,16]), torch.Size([4,16])]\n    assert namespace['mean_embeddings'].shape == (2,16)",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/hugging-science/test_current_workflows.py",
+      "line": 56,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    namespace = {'repo':'opig/OAS', 'revision':'synthetic-revision'}\n    with mock.patch.object(datasets, 'load_dataset', side_effect=local_load):\n        exec(code_block('using-datasets.md', 'human_only ='), namespace)\n    assert namespace['subset']['meta_Species'] == ['human','human']\n    assert calls[0][1]['name'] == 'paired'",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/hugging-science/test_current_workflows.py",
+      "line": 103,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    namespace = {}\n    with mock.patch.object(hub.HfApi, 'model_info', return_value=info):\n        exec(code_block('using-models.md', 'inference_provider_mapping'), namespace)\n    assert list(namespace['live']) == ['hf-inference']\n    assert namespace['live']['hf-inference'].task == 'fill-mask'",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/hugging-science/test_current_workflows.py",
+      "line": 69,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    with mock.patch.object(datasets, 'load_dataset', return_value=data):\n        with pytest.raises(ValueError, match='schema changed'):\n            exec(code_block('using-datasets.md', 'human_only ='), {'repo':'opig/OAS', 'revision':'test'})\n\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/molecular-dynamics/test_examples.py",
+      "line": 147,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    blocks = re.findall(r\"```python\\n(.*?)```\", (SKILL_ROOT / \"references/mdanalysis_analysis.md\").read_text(), re.S)\n    block = next(b for b in blocks if containing in b)\n    exec(compile(block, \"mdanalysis_analysis.md\", \"exec\"), namespace)\n\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/molecular-dynamics/test_examples.py",
+      "line": 31,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "        definitions = [node for node in tree.body if isinstance(node, ast.FunctionDef)]\n        if definitions:\n            exec(compile(ast.Module(body=definitions, type_ignores=[]), str(relative_path), \"exec\"), namespace)\n    return namespace\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/networkx/test_examples.py",
+      "line": 23,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    code, = [s for s in blocks(relative) if marker in s]\n    scope = {\"nx\": nx, **context}\n    exec(compile(code, str(SKILL_ROOT / relative), \"exec\"), scope)\n    return scope\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/networkx/test_examples.py",
+      "line": 134,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    for code in blocks(\"references/generators.md\"):\n        scope = context.copy()\n        exec(compile(code, \"generators.md\", \"exec\"), scope)\n        assert isinstance(scope[\"G\"], nx.Graph)\n    graph = nx.configuration_model([3, 3, 2, 2, 2, 2], seed=42)",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/networkx/test_examples.py",
+      "line": 246,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "            continue\n        graph = nx.karate_club_graph()\n        exec(compile(code, \"visualization.md\", \"exec\"), {\n            \"nx\": nx, \"plt\": plt, \"G\": graph, \"pos\": nx.spring_layout(graph, seed=42)\n        })",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/neuropixels-analysis/test_scripts.py",
+      "line": 295,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "                                     SORTER_PARAMS=user_params, rec=MagicMock(),\n                                     output_path=Path(\"output\"), si=MagicMock())\n                    exec(compile(routing, \"analysis_template.py\", \"exec\"), namespace)\n                    kwargs = namespace[\"si\"].run_sorter.call_args.kwargs\n                    expected = {flag: not enabled} if flag else {}",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/open-notebook/test_open_notebook_skill.py",
+      "line": 306,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    namespace = {}\n    for block in blocks:\n        exec(compile(block, filename, \"exec\"), namespace)\n    return namespace\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/optimize-for-gpu/test_documented_algorithms.py",
+      "line": 27,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "        for node in tree.body:\n            if isinstance(node, ast.FunctionDef) and node.name == name:\n                exec(compile(ast.Module(body=[node], type_ignores=[]), str(SKILL_ROOT / \"references\" / reference), \"exec\"), namespace)\n                return namespace[name]\n    raise AssertionError(f\"Missing documented function {name}\")",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/pymoo/test_api_contracts.py",
+      "line": 197,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "            namespace[\"result\"] = minimize(get_problem(\"zdt1\", n_var=5),\n                NSGA2(pop_size=10), (\"n_gen\", 3), seed=1, save_history=True)\n        exec(compile(code, file, \"exec\"), namespace)\n    if file == \"visualization.md\":\n        assert len(list(tmp_path.glob(\"*.png\"))) == 8",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/seaborn/test_plot_contracts.py",
+      "line": 40,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "\ndef run(code, ns):\n    exec(compile(code, '<seaborn documented recipe>', 'exec'), ns)\n    return ns\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/statsmodels/test_examples.py",
+      "line": 34,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "\ndef run(block, namespace, label):\n    exec(compile(block, label, \"exec\"), namespace)\n    plt.close(\"all\")\n",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/transformers/test_workflows.py",
+      "line": 196,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    code = re.search(r\"```python\\n(.*?)```\", section, re.S).group(1)\n    namespace = {}\n    exec(compile(code, \"training.md:WeightedTrainer\", \"exec\"), namespace)\n    model = t.AutoModelForSequenceClassification.from_config(bert_config(tokenizer, num_labels=2))\n    data = training_data(tokenizer)",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/vaex/test_recipes.py",
+      "line": 44,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "    for index, source in enumerate(blocks):\n        if index not in illustrative:\n            exec(compile(source, f'{relative}:block-{index}', 'exec'), namespace)\n    if 'visualization' in relative:\n        from PIL import Image",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "tests/zarr-python/test_examples.py",
+      "line": 31,
+      "rule": "dynamic-execution",
+      "detail": "exec",
+      "context": "            continue\n        if language == \"python\":\n            exec(compile(code, f\"{document}:block-{index}\", \"exec\"), namespace)\n        elif document.endswith(\"v3_migration.md\"):\n            cli = Path(sys.executable).with_name(\"zarr\")",
+      "assessment": "Test code executes documented snippets; not executed by the web application. Not a safety certification of running the tests."
+    },
+    {
+      "severity": "review",
+      "path": "skills/cirq/references/noise.md",
+      "rule": "local-link",
+      "detail": "q",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/core_workflows.md",
+      "rule": "local-link",
+      "detail": "=[O:2]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/core_workflows.md",
+      "rule": "local-link",
+      "detail": "=[O:2]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "=[O:2]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "=[O:2]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "=[O:3]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "=[O:3]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "[OH]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "=[O:4]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/datamol/references/reactions_data.md",
+      "rule": "local-link",
+      "detail": "=[O:4]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/exa-search/SKILL.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/exa-search/references/web-extract.md",
+      "rule": "local-link",
+      "detail": "URL",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/exa-search/references/web-search.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/exa-search/references/web-search.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/exa-search/references/web-search.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/geomaster/references/data-sources.md",
+      "rule": "local-link",
+      "detail": "37.700,-122.401,37.701,-122.400",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/markdown-mermaid-writing/references/markdown_style_guide.md",
+      "rule": "local-link",
+      "detail": "images/architecture_overview.png",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/matplotlib/references/styling_guide.md",
+      "rule": "local-link",
+      "detail": "np.linspace(0,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/code_transformation_patterns.md",
+      "rule": "local-link",
+      "detail": "d_data,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/cupy.md",
+      "rule": "local-link",
+      "detail": "x,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/cupy.md",
+      "rule": "local-link",
+      "detail": "a,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "d_data,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "...args",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "d_matrix,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "data",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "d_data,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "d_data,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "d_chunk1,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "d_chunk2,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "rng_states,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/optimize-for-gpu/references/numba.md",
+      "rule": "local-link",
+      "detail": "a,",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/parallel-web/SKILL.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/parallel-web/references/web-search.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/parallel-web/references/web-search.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/parallel-web/references/web-search.md",
+      "rule": "local-link",
+      "detail": "url",
+      "assessment": "Pattern candidate remains in prose; review illustrative placeholders or link intent."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "[OX2H1]",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "[",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/smarts_patterns.md",
+      "rule": "local-link",
+      "detail": "=O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/workflows_and_best_practices.md",
+      "rule": "local-link",
+      "detail": "O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/workflows_and_best_practices.md",
+      "rule": "local-link",
+      "detail": "O",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/workflows_and_best_practices.md",
+      "rule": "local-link",
+      "detail": "F",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/rdkit/references/workflows_and_best_practices.md",
+      "rule": "local-link",
+      "detail": "F",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    },
+    {
+      "severity": "review",
+      "path": "skills/torch-geometric/references/heterogeneous.md",
+      "rule": "local-link",
+      "detail": "x",
+      "assessment": "Regex candidate from code/example syntax, not a live Markdown link in prose."
+    }
+  ],
+  "upstreamScanner": {
+    "generated": "2026-10-19T09:33:35+00:00",
+    "totals": {
+      "skills_scanned": 177,
+      "findings": 466,
+      "critical": 32,
+      "high": 21,
+      "medium": 255,
+      "low": 157,
+      "info": 1,
+      "safe_skills": 159
+    },
+    "crossSkillFindings": 377,
+    "triageDocumentDate": "2026-09-13",
+    "assessment": "Upstream triage predates the 2026-10-19 scanner report. High/critical results are not globally cleared. Web app never executes upstream scripts."
+  }
+}

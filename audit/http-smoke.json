@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "route": "/api/status",
+      "expected": 200,
+      "actual": 200,
+      "passed": true,
+      "body": {
+        "ai": false,
+        "authConfigured": false,
+        "authenticated": false,
+        "cloudStorage": false,
+        "durableQuota": false,
+        "storage": "browser-local"
+      }
+    },
+    {
+      "route": "/api/chat",
+      "expected": 401,
+      "actual": 401,
+      "passed": true,
+      "body": {
+        "error": "Đăng nhập để sử dụng AI."
+      }
+    },
+    {
+      "route": "/api/auth",
+      "expected": 503,
+      "actual": 503,
+      "passed": true,
+      "body": {
+        "error": "Cần cấu hình APP_PASSWORD và AUTH_SECRET trên Vercel."
+      }
+    },
+    {
+      "route": "/api/auth",
+      "expected": 403,
+      "actual": 403,
+      "passed": true,
+      "body": {
+        "error": "Nguồn yêu cầu không hợp lệ."
+      }
+    },
+    {
+      "route": "/api/projects",
+      "expected": 401,
+      "actual": 401,
+      "passed": true,
+      "body": {
+        "error": "Đăng nhập workspace để đồng bộ dự án."
+      }
+    }
+  ],
+  "europePmc": {
+    "status": 200,
+    "count": 20,
+    "query": "CRISPR",
+    "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+  },
+  "browser": {
+    "runtimeErrors": [],
+    "desktop": "1440x1000",
+    "mobile": "390x844",
+    "horizontalOverflow": false
+  }
+}

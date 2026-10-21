@@ -1,0 +1,8 @@
+.git
+node_modules
+.next
+tests
+audit/text-index.json
+audit/manifest.csv
+worker
+vendor

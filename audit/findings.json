@@ -1,0 +1,534 @@
+[
+  {
+    "severity": "review",
+    "path": "tests/benchling-integration/test_examples.py",
+    "line": 92,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/biopython/test_examples.py",
+    "line": 36,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/biopython/test_examples.py",
+    "line": 43,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/cirq/test_examples.py",
+    "line": 167,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/cirq/test_examples.py",
+    "line": 24,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/dask/test_recipes.py",
+    "line": 25,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/datamol/test_workflows.py",
+    "line": 19,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/flowio/test_api_behavior.py",
+    "line": 176,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/geomaster/test_recipes.py",
+    "line": 21,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/histolab/test_recipes.py",
+    "line": 34,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/hugging-science/test_current_workflows.py",
+    "line": 34,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/hugging-science/test_current_workflows.py",
+    "line": 56,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/hugging-science/test_current_workflows.py",
+    "line": 103,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/hugging-science/test_current_workflows.py",
+    "line": 69,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/molecular-dynamics/test_examples.py",
+    "line": 147,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/molecular-dynamics/test_examples.py",
+    "line": 31,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/networkx/test_examples.py",
+    "line": 23,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/networkx/test_examples.py",
+    "line": 134,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/networkx/test_examples.py",
+    "line": 246,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/neuropixels-analysis/test_scripts.py",
+    "line": 295,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/open-notebook/test_open_notebook_skill.py",
+    "line": 306,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/optimize-for-gpu/test_documented_algorithms.py",
+    "line": 27,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/pymoo/test_api_contracts.py",
+    "line": 197,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/seaborn/test_plot_contracts.py",
+    "line": 40,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/statsmodels/test_examples.py",
+    "line": 34,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/transformers/test_workflows.py",
+    "line": 196,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/vaex/test_recipes.py",
+    "line": 44,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "tests/zarr-python/test_examples.py",
+    "line": 31,
+    "rule": "dynamic-execution",
+    "detail": "exec"
+  },
+  {
+    "severity": "review",
+    "path": "skills/cirq/references/noise.md",
+    "rule": "local-link",
+    "detail": "q"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/core_workflows.md",
+    "rule": "local-link",
+    "detail": "=[O:2]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/core_workflows.md",
+    "rule": "local-link",
+    "detail": "=[O:2]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "=[O:2]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "=[O:2]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "=[O:3]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "=[O:3]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "[OH]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "=[O:4]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/datamol/references/reactions_data.md",
+    "rule": "local-link",
+    "detail": "=[O:4]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/exa-search/SKILL.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/exa-search/references/web-extract.md",
+    "rule": "local-link",
+    "detail": "URL"
+  },
+  {
+    "severity": "review",
+    "path": "skills/exa-search/references/web-search.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/exa-search/references/web-search.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/exa-search/references/web-search.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/geomaster/references/data-sources.md",
+    "rule": "local-link",
+    "detail": "37.700,-122.401,37.701,-122.400"
+  },
+  {
+    "severity": "review",
+    "path": "skills/markdown-mermaid-writing/references/markdown_style_guide.md",
+    "rule": "local-link",
+    "detail": "images/architecture_overview.png"
+  },
+  {
+    "severity": "review",
+    "path": "skills/matplotlib/references/styling_guide.md",
+    "rule": "local-link",
+    "detail": "np.linspace(0,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/code_transformation_patterns.md",
+    "rule": "local-link",
+    "detail": "d_data,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/cupy.md",
+    "rule": "local-link",
+    "detail": "x,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/cupy.md",
+    "rule": "local-link",
+    "detail": "a,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "d_data,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "...args"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "d_matrix,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "data"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "d_data,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "d_data,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "d_chunk1,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "d_chunk2,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "rng_states,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/optimize-for-gpu/references/numba.md",
+    "rule": "local-link",
+    "detail": "a,"
+  },
+  {
+    "severity": "review",
+    "path": "skills/parallel-web/SKILL.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/parallel-web/references/web-search.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/parallel-web/references/web-search.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/parallel-web/references/web-search.md",
+    "rule": "local-link",
+    "detail": "url"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "[OX2H1]"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "["
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/smarts_patterns.md",
+    "rule": "local-link",
+    "detail": "=O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/workflows_and_best_practices.md",
+    "rule": "local-link",
+    "detail": "O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/workflows_and_best_practices.md",
+    "rule": "local-link",
+    "detail": "O"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/workflows_and_best_practices.md",
+    "rule": "local-link",
+    "detail": "F"
+  },
+  {
+    "severity": "review",
+    "path": "skills/rdkit/references/workflows_and_best_practices.md",
+    "rule": "local-link",
+    "detail": "F"
+  },
+  {
+    "severity": "review",
+    "path": "skills/torch-geometric/references/heterogeneous.md",
+    "rule": "local-link",
+    "detail": "x"
+  }
+]

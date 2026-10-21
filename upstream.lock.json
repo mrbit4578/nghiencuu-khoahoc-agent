@@ -1,0 +1,9 @@
+{
+  "repository": "K-Dense-AI/scientific-agent-skills",
+  "commit": "593377bb048752abb0152deab9fbb1083a6087df",
+  "version": "2.72.0",
+  "archiveSha256": "1b1b0835a8efa5fb862be42f935bfbaf01c04bd489eb3f4960249591f8398a45",
+  "originalFiles": 2780,
+  "manifest": "audit/manifest.json",
+  "license": "MIT; individual fixture license files retained"
+}
