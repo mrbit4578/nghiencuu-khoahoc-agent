@@ -22,6 +22,8 @@ SHA-256 ZIP: `1b1b0835a8efa5fb862be42f935bfbaf01c04bd489eb3f4960249591f8398a45`.
 
 Commit nguồn được tìm trong ZIP comment: `593377bb048752abb0152deab9fbb1083a6087df`. Đã đối chiếu với commit public của K-Dense-AI và tải lại độc lập từ codeload; toàn bộ 2.780 hash khớp manifest gốc.
 
+Bộ dựng khôi phục quyền thực thi cho **44 file executable** được ghi trong metadata ZIP, gồm cả ba shell script. Trên POSIX, việc chỉ ghi bytes mà không khôi phục executable bit sẽ làm bộ kiểm tra cấu trúc upstream từ chối các shell script, dù SHA-256 đúng. Danh sách executable được khóa trong `upstream.lock.json`; không sửa nội dung nguồn để xử lý vấn đề đóng gói này.
+
 - `audit/manifest.json`: từng đường dẫn, byte, CRC32, SHA-256 và các phép kiểm đã thực hiện.
 - `audit/manifest.csv`: danh mục rút gọn để đối chiếu.
 - `audit/summary.json`: tổng hợp số lượng và phạm vi.

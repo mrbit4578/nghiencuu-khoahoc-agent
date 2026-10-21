@@ -8,6 +8,7 @@
 - Kiểm thử security bổ sung sau sửa Origin reverse-proxy: PASS **4/4**.
 - `npm audit`: **0 vulnerabilities** tại lần kiểm tra cuối (toàn bộ dependency ứng dụng).
 - `node scripts/ensure-upstream.mjs --verify-download`: PASS; tải độc lập đúng commit upstream và xác minh **2.780/2.780** hash.
+- Bộ dựng giữ thêm executable metadata cho 44 file gốc trên POSIX, bao gồm ba shell script, để kiểm tra Linux không bị sai do mất quyền thực thi trong bước giải nén.
 - Upstream `_meta`: **18 passed, 4.222 subtests passed, 2 subtests lỗi môi trường thiếu Bash trên Windows**. Không chạy toàn bộ bộ test môi trường khoa học cô lập. CI Linux có bước kiểm tra tương ứng; kết quả remote được xem riêng trên GitHub Actions.
 
 ## Kiểm thử trình duyệt thực tế

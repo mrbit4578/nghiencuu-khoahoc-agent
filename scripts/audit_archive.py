@@ -22,6 +22,8 @@ with zipfile.ZipFile(archive) as z:
         target = destination.joinpath(*relative.parts)
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
+        if sys.platform != 'win32':
+            target.chmod((item.external_attr >> 16) & 0o777 or 0o644)
         record = {'path': str(relative), 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest(), 'crc32': format(item.CRC, '08x'), 'kind': 'binary', 'checks': ['full-byte-read', 'crc-verified', 'preserved']}
         ext = relative.suffix.lower()
         try:

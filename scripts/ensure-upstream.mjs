@@ -85,6 +85,13 @@ await pool(manifest, async (entry) => {
   )
     throw new Error(`Source integrity check failed: ${entry.path}`);
 });
+if (process.platform !== "win32") {
+  const known = new Set(manifest.map(entry => entry.path));
+  await pool(lock.executableFiles || [], async file => {
+    if (!known.has(file)) throw new Error("Executable metadata is outside the audited manifest");
+    await fs.chmod(path.join(source, file), 0o755);
+  });
+}
 console.log(
   `Verified ${manifest.length} source files against the original audit.`,
 );
