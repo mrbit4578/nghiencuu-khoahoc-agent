@@ -2657,3 +2657,23 @@ hr {
   .taxonomy-options label { min-height: 35px; }
 }
 @media (max-width: 430px) { .science-groups { grid-template-columns: 1fr; } }
+
+/* Bulk skill selection */
+.skill-selection-checkbox { display: flex; align-items: center; gap: 9px; cursor: pointer; font-size: 12px; line-height: 1.5; }
+.skill-selection-checkbox input { width: 17px; height: 17px; accent-color: var(--teal); margin: 0; flex-shrink: 0; }
+.bulk-selection-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 24px; background: var(--mint); border: 1px solid #cbded7; border-radius: 10px; padding: 15px 18px; margin-top: 20px; }
+.bulk-selection-bar > button { margin-left: auto; }
+.science-results-heading > div { flex: 1; }
+.science-results-heading > .skill-selection-checkbox { flex-shrink: 0; color: var(--teal-dark); }
+.context-selection-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.context-skill-list { max-height: 360px; overflow-y: auto; scrollbar-gutter: stable; margin-bottom: 10px; }
+.context-panel .context-receipt { padding: 10px; background: var(--surface); border-radius: 8px; font-size: 11px; color: var(--teal-dark); }
+@media (max-width: 720px) {
+  .skill-selection-checkbox { min-height: 40px; }
+  .science-results-heading { flex-wrap: wrap; }
+  .science-results-heading > .skill-selection-checkbox { flex-basis: 100%; padding-left: 48px; }
+  .bulk-selection-bar { gap: 6px; padding: 12px; }
+  .bulk-selection-bar > .skill-selection-checkbox { width: 100%; }
+  .bulk-selection-bar > button { min-height: 35px; }
+  .context-skill-list { max-height: 270px; }
+}

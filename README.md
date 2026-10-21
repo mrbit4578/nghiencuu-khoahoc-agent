@@ -34,7 +34,7 @@ Các chức năng thư viện, tìm bài báo, ghi chú, xuất dữ liệu, CSV
 - Dự án: tạo/xóa, ghi chú tự lưu, gắn kỹ năng, lưu bài báo, nhập/xuất JSON, Markdown và BibTeX.
 - Đồng bộ nhiều thiết bị qua Redis REST, có hợp nhất phiên bản và kiểm tra cập nhật đồng thời. Đây là **một workspace dùng chung mật khẩu**, chưa phải hệ thống nhiều tài khoản riêng biệt.
 - Công cụ chạy trực tiếp trên trình duyệt: thống kê CSV và phân tích một trình tự DNA/FASTA.
-- Trợ lý AI: Chat Completions tương thích OpenAI, tối đa bốn SKILL.md làm ngữ cảnh, xuất hội thoại. AI không có công cụ thực thi mã hoặc tự duyệt web trong cuộc trò chuyện.
+- Trợ lý AI: Chat Completions tương thích OpenAI, chọn từng kỹ năng, toàn nhóm hoặc cả 177 kỹ năng làm ngữ cảnh, xuất hội thoại. AI không có công cụ thực thi mã hoặc tự duyệt web trong cuộc trò chuyện.
 - Audit: danh mục **2.780 file** nguyên bản và SHA-256, xem/tải từng file, báo cáo kiểm tra và giới hạn đã biết.
 
 ## Cấu hình AI và lưu trữ
@@ -46,6 +46,7 @@ Sao chép `.env.example` thành `.env.local`, sau đó cấu hình các biến c
 | `AI_API_KEY` | API key ở phía server; không đưa vào client hoặc Git |
 | `AI_BASE_URL` | Mặc định `https://api.openai.com/v1`; phải là HTTPS |
 | `AI_MODEL` | Model được nhà cung cấp của bạn cấp quyền sử dụng |
+| `AI_CONTEXT_MAX_CHARS` | Tùy chọn: ngân sách ký tự tài liệu kỹ năng, mặc định 180.000; mọi kỹ năng đã chọn đều được gửi, tài liệu dài được trích gọn |
 | `APP_PASSWORD` | Mật khẩu cho workspace cá nhân |
 | `AUTH_SECRET` | Chuỗi ngẫu nhiên ít nhất 32 ký tự để ký cookie |
 | `UPSTASH_REDIS_REST_URL` | Tùy chọn: lưu dự án đám mây và hạn mức dùng chung |

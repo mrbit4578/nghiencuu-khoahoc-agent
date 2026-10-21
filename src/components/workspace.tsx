@@ -47,6 +47,8 @@ import remarkGfm from "remark-gfm";
 import Papa from "papaparse";
 import { describe, sequenceStats } from "@/lib/analysis";
 import { filterSkills } from "@/lib/skill-filters";
+import { selectSkills, selectionState } from "@/lib/skill-selection";
+import type { SkillContextInfo } from "@/lib/chat-context";
 import { projectsSchema } from "@/lib/projects";
 import type { Catalog, Paper, Project, Skill } from "@/lib/types";
 
@@ -58,6 +60,19 @@ const scienceIcons: Record<string, typeof Microscope> = {
 function ScienceIcon({ icon, size = 21 }: { icon?: string; size?: number }) {
   const Icon = scienceIcons[icon || ""] || Microscope;
   return <Icon size={size} aria-hidden="true" />;
+}
+
+function SkillSelectionCheckbox({ selected, ids, onChange, children }: {
+  selected: string[]; ids: string[]; onChange: (checked: boolean) => void; children: React.ReactNode;
+}) {
+  const input = useRef<HTMLInputElement>(null);
+  const state = selectionState(selected, ids);
+  useEffect(() => { if (input.current) input.current.indeterminate = state.partial; }, [state.partial]);
+  return <label className="skill-selection-checkbox">
+    <input ref={input} type="checkbox" checked={state.checked} disabled={!ids.length}
+      onChange={(e) => onChange(e.target.checked)} />
+    <span>{children}</span>
+  </label>;
 }
 
 type Tab =
@@ -200,6 +215,7 @@ export default function Workspace() {
   const [prompt, setPrompt] = useState("");
   const [chatBusy, setChatBusy] = useState(false);
   const [chatError, setChatError] = useState("");
+  const [lastContext, setLastContext] = useState<SkillContextInfo | null>(null);
   const [analysis, setAnalysis] = useState<ReturnType<typeof describe> | null>(
     null,
   );
@@ -313,13 +329,9 @@ export default function Workspace() {
     setMobile(false);
   };
   const toggleSkill = (id: string) =>
-    setSelected((prev) =>
-      prev.includes(id)
-        ? prev.filter((x) => x !== id)
-        : prev.length < 4
-          ? [...prev, id]
-          : (setToast("Chọn tối đa 4 kỹ năng cho mỗi cuộc trò chuyện."), prev),
-    );
+    setSelected((prev) => selectSkills(prev, [id], !prev.includes(id)));
+  const selectScope = (ids: string[], checked: boolean) =>
+    setSelected((prev) => selectSkills(prev, ids, checked));
   const star = (id: string) =>
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
@@ -393,6 +405,7 @@ export default function Workspace() {
       const data = await res.json();
       if (!res.ok) throw Error(data.error);
       setChat((prev) => [...prev, { role: "assistant", content: data.answer }]);
+      setLastContext(data.context || null);
     } catch (e) {
       setChatError(e instanceof Error ? e.message : "Không thể gọi AI.");
     } finally {
@@ -555,7 +568,8 @@ export default function Workspace() {
         <button
           className={"pick " + (selected.includes(s.id) ? "picked" : "")}
           onClick={() => toggleSkill(s.id)}
-          aria-label={"Chọn " + s.title}
+          aria-pressed={selected.includes(s.id)}
+          aria-label={(selected.includes(s.id) ? "Bỏ chọn " : "Chọn ") + s.title}
         >
           {selected.includes(s.id) ? <Check size={17} /> : <Plus size={17} />}
         </button>
@@ -883,8 +897,8 @@ export default function Workspace() {
                 <h1>Thư viện kỹ năng</h1>
                 <p>
                   Đọc tài liệu và mã nguồn của toàn bộ{" "}
-                  {catalog?.skills.length || 177} kỹ năng. Chọn tối đa 4 kỹ năng
-                  làm ngữ cảnh cho trợ lý.
+                  {catalog?.skills.length || 177} kỹ năng. Chọn từng kỹ năng, toàn bộ nhóm
+                  hoặc toàn bộ thư viện làm ngữ cảnh cho trợ lý.
                 </p>
               </div>
               <section className="science-directory" aria-label="Nhóm khoa học">
@@ -931,10 +945,21 @@ export default function Workspace() {
                 {(query || family !== "all" || category !== "all" || favoritesOnly || includeRelated) &&
                   <button className="text-button" onClick={resetLibrary}>Xóa bộ lọc</button>}
               </div>
+              <div className="bulk-selection-bar" aria-label="Chọn hàng loạt kỹ năng">
+                <SkillSelectionCheckbox selected={selected} ids={catalog?.skills.map((s) => s.id) || []}
+                  onChange={(checked) => selectScope(catalog?.skills.map((s) => s.id) || [], checked)}>
+                  Chọn toàn bộ thư viện ({catalog?.skills.length || 0})
+                </SkillSelectionCheckbox>
+                <SkillSelectionCheckbox selected={selected} ids={filtered.map((s) => s.id)}
+                  onChange={(checked) => selectScope(filtered.map((s) => s.id), checked)}>
+                  Chọn tất cả kết quả ({filtered.length})
+                </SkillSelectionCheckbox>
+                <button className="text-button" disabled={!selected.length} onClick={() => setSelected([])}>Bỏ chọn hết</button>
+              </div>
               <div className="results-line" aria-live="polite">
                 <span>{filtered.length} kỹ năng phù hợp{includeRelated && (category !== "all" || family !== "all") ? " · gồm liên ngành" : ""}</span>
                 <button className="text-button" onClick={() => go("assistant")}>
-                  Đã chọn {selected.length}/4 <ArrowRight size={14} />
+                  Đã chọn {selected.length}/{catalog?.skills.length || 177} <ArrowRight size={14} />
                 </button>
               </div>
               {catalog?.groups.filter((g) => filtered.some((s) => s.groupId === g.id)).map((g) => (
@@ -942,6 +967,10 @@ export default function Workspace() {
                   <div className="science-results-heading">
                     <span className="skill-icon"><ScienceIcon icon={g.icon} /></span>
                     <div><h2 id={"group-" + g.id}>{g.label} <span>{filtered.filter((s) => s.groupId === g.id).length}</span></h2><p>{g.description}</p></div>
+                    <SkillSelectionCheckbox selected={selected} ids={catalog.skills.filter((s) => s.groupId === g.id).map((s) => s.id)}
+                      onChange={(checked) => selectScope(catalog.skills.filter((s) => s.groupId === g.id).map((s) => s.id), checked)}>
+                      Chọn toàn nhóm ({g.count})
+                    </SkillSelectionCheckbox>
                   </div>
                   <div className="skills-grid">{filtered.filter((s) => s.groupId === g.id).map(skillCard)}</div>
                 </section>
@@ -1163,6 +1192,7 @@ export default function Workspace() {
                       className="text-button"
                       onClick={() => {
                         setChat([]);
+                        setLastContext(null);
                         setChatError("");
                       }}
                       disabled={chatBusy}
@@ -1192,12 +1222,24 @@ export default function Workspace() {
                 <aside className="context-panel">
                   <span className="eyebrow">NGỮ CẢNH NGHIÊN CỨU</span>
                   <h3>
-                    Kỹ năng đã chọn <span>{selected.length}/4</span>
+                    Kỹ năng đã chọn <span>{selected.length}/{catalog?.skills.length || 177}</span>
                   </h3>
                   <p>
-                    Tài liệu SKILL.md của mỗi kỹ năng được gửi cùng câu hỏi. Các
-                    file tham khảo khác chưa được nạp tự động.
+                    Mỗi kỹ năng đã chọn đều được đưa vào ngữ cảnh. Khi chọn nhiều,
+                    SKILL.md được trích gọn để phù hợp dung lượng AI; các file tham khảo chưa được nạp tự động.
                   </p>
+                  <div className="context-selection-controls">
+                    <SkillSelectionCheckbox selected={selected} ids={catalog?.skills.map((s) => s.id) || []}
+                      onChange={(checked) => selectScope(catalog?.skills.map((s) => s.id) || [], checked)}>
+                      Chọn tất cả ({catalog?.skills.length || 0})
+                    </SkillSelectionCheckbox>
+                    <button className="text-button" disabled={!selected.length} onClick={() => setSelected([])}>Bỏ chọn hết</button>
+                  </div>
+                  {lastContext && <p className="context-receipt" role="status">
+                    Lần gửi gần nhất: {lastContext.includedCount}/{lastContext.selectedCount} kỹ năng đã gửi
+                    {lastContext.excerptedCount > 0 && ` · ${lastContext.excerptedCount} tài liệu trích gọn`}.
+                  </p>}
+                  <div className="context-skill-list" aria-label="Danh sách kỹ năng đã chọn">
                   {selected.map((id) => (
                     <div className="context-skill" key={id}>
                       <span>
@@ -1212,6 +1254,7 @@ export default function Workspace() {
                       </button>
                     </div>
                   ))}
+                  </div>
                   <button
                     className="button secondary full"
                     onClick={() => go("library")}
