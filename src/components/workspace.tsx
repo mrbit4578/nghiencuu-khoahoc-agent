@@ -43,6 +43,8 @@ type Tab =
   "home" | "library" | "papers" | "assistant" | "projects" | "tools" | "audit";
 type Status = {
   ai: boolean;
+  aiProvider?: string | null;
+  aiModel?: string | null;
   authConfigured: boolean;
   authenticated: boolean;
   cloudStorage: boolean;
@@ -163,6 +165,7 @@ export default function Workspace() {
   const [config, setConfig] = useState(false);
   const [password, setPassword] = useState("");
   const [loginBusy, setLoginBusy] = useState(false);
+  const [loginError, setLoginError] = useState("");
   const [paperQuery, setPaperQuery] = useState("");
   const [papers, setPapers] = useState<Paper[]>([]);
   const [paperTotal, setPaperTotal] = useState<number | null>(null);
@@ -375,6 +378,14 @@ export default function Workspace() {
   };
   const login = async (e: FormEvent) => {
     e.preventDefault();
+    setLoginError("");
+    if (password.trim().startsWith("lrsk-")) {
+      setLoginError(
+        "Đây là API key LarpRouter. Key đã được cấu hình trên máy chủ. Hãy nhập mật khẩu workspace được cấp riêng vào ô này.",
+      );
+      setPassword("");
+      return;
+    }
     setLoginBusy(true);
     try {
       const r = await fetch("/api/auth", {
@@ -386,9 +397,11 @@ export default function Workspace() {
       if (!r.ok) throw Error(data.error);
       setPassword("");
       await refreshStatus();
+      setConfig(false);
+      go("assistant");
       setToast("Đã đăng nhập workspace.");
     } catch (e) {
-      setToast(e instanceof Error ? e.message : "Không đăng nhập được.");
+      setLoginError(e instanceof Error ? e.message : "Không đăng nhập được.");
     } finally {
       setLoginBusy(false);
     }
@@ -1892,27 +1905,50 @@ export default function Workspace() {
               <span className={"badge " + (status?.ai ? "green" : "amber")}>
                 {status?.ai ? "AI đã được cấu hình" : "AI chưa được kích hoạt"}
               </span>
-              <h3>Kết nối dịch vụ AI</h3>
-              <p>
-                Thêm các biến môi trường trong Vercel → Settings → Environment
-                Variables rồi redeploy. Không nhập API key vào mã nguồn.
-              </p>
-              <div className="env-list">
-                {[
-                  "AI_API_KEY",
-                  "AI_BASE_URL",
-                  "AI_MODEL",
-                  "APP_PASSWORD",
-                  "AUTH_SECRET",
-                ].map((v) => (
-                  <code key={v}>{v}</code>
-                ))}
-              </div>
-              <p>
-                <strong>AI_BASE_URL</strong> hỗ trợ API Chat Completions tương
-                thích OpenAI. <strong>AUTH_SECRET</strong> cần ít nhất 32 ký tự
-                ngẫu nhiên.
-              </p>
+              <h3>
+                {status?.ai
+                  ? "AI đã sẵn sàng cho phiên nghiên cứu"
+                  : "Kết nối dịch vụ AI"}
+              </h3>
+              {status?.ai && (
+                <>
+                  <div
+                    className="env-list"
+                    aria-label="Dịch vụ AI đang sử dụng"
+                  >
+                    <code>{status.aiProvider || "Dịch vụ AI"}</code>
+                    <code>{status.aiModel}</code>
+                  </div>
+                  <p>
+                    API key đã được cấu hình trên máy chủ. Bạn chỉ cần đăng nhập
+                    workspace bên dưới để bắt đầu phân tích.
+                  </p>
+                </>
+              )}
+              <details open={!status?.ai}>
+                <summary>Cấu hình máy chủ và triển khai</summary>
+                <p>
+                  Khi triển khai Vercel, thêm các biến môi trường trong Settings
+                  → Environment Variables rồi redeploy. Không nhập API key vào
+                  mã nguồn.
+                </p>
+                <div className="env-list">
+                  {[
+                    "AI_API_KEY",
+                    "AI_BASE_URL",
+                    "AI_MODEL",
+                    "APP_PASSWORD",
+                    "AUTH_SECRET",
+                  ].map((v) => (
+                    <code key={v}>{v}</code>
+                  ))}
+                </div>
+                <p>
+                  <strong>AI_BASE_URL</strong> hỗ trợ API Chat Completions tương
+                  thích OpenAI. <strong>AUTH_SECRET</strong> cần ít nhất 32 ký
+                  tự ngẫu nhiên.
+                </p>
+              </details>
               <hr />
               {status?.authenticated ? (
                 <>
@@ -1932,6 +1968,10 @@ export default function Workspace() {
                 </>
               ) : (
                 <form onSubmit={login}>
+                  <p id="workspace-password-help">
+                    Dùng mật khẩu workspace đã được cấp. Đây là mật khẩu đăng
+                    nhập ứng dụng, không phải API key LarpRouter.
+                  </p>
                   <label className="field-label">
                     MẬT KHẨU WORKSPACE
                     <input
@@ -1939,11 +1979,20 @@ export default function Workspace() {
                       autoComplete="current-password"
                       maxLength={256}
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="APP_PASSWORD do bạn cấu hình"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        setLoginError("");
+                      }}
+                      placeholder="Nhập mật khẩu workspace"
+                      aria-describedby="workspace-password-help"
                       required
                     />
                   </label>
+                  {loginError && (
+                    <div className="notice danger" role="alert">
+                      {loginError}
+                    </div>
+                  )}
                   <button
                     className="button primary full"
                     disabled={!status?.authConfigured || loginBusy}

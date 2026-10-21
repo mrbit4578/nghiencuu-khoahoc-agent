@@ -10,6 +10,12 @@ npm run local
 
 Lệnh này build bản production rồi phục vụ ở `http://localhost:3000` trên loopback. Cấu hình AI vẫn đọc từ `.env.local`. Khi sửa mã, dừng server rồi chạy lại lệnh để dựng bản mới. Đóng server đang chiếm port 3000 trước khi khởi động phiên khác.
 
+## Đăng nhập để dùng AI
+
+Nếu cửa sổ workspace báo AI đã được cấu hình và hiện model đang dùng, không cần nhập API key lần nữa. Ô **Mật khẩu workspace** dùng giá trị `APP_PASSWORD` đã được cấp hoặc lưu trong `.env.local`, không dùng key `lrsk-...` của LarpRouter. Sau khi đăng nhập, ứng dụng chuyển thẳng sang Trợ lý nghiên cứu.
+
+API key nằm ở máy chủ trong `AI_API_KEY`. Không đưa API key, mật khẩu workspace hoặc AUTH_SECRET vào Git. Trang trạng thái chỉ trả tên dịch vụ/model và các cờ sẵn sàng, không trả giá trị credential.
+
 ## Phát triển mã
 
 ```bash
