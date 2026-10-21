@@ -8,6 +8,23 @@ const config: NextConfig = {
     ],
   },
   async headers() {
+    const isDevelopment = process.env.NODE_ENV === "development";
+    // React's development stack reconstruction requires eval. Production
+    // deliberately excludes it; only local HMR needs the WebSocket origins.
+    const scriptSources = ["'self'", "'unsafe-inline'", ...(isDevelopment ? ["'unsafe-eval'"] : [])];
+    const connectSources = ["'self'", ...(isDevelopment ? ["ws://localhost:*", "ws://127.0.0.1:*"] : [])];
+    const contentSecurityPolicy = [
+      "default-src 'self'",
+      `script-src ${scriptSources.join(" ")}`,
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      `connect-src ${connectSources.join(" ")}`,
+      "font-src 'self'",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+    ].join("; ");
     return [
       {
         source: "/:path*",
@@ -21,8 +38,7 @@ const config: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'",
+            value: contentSecurityPolicy,
           },
         ],
       },

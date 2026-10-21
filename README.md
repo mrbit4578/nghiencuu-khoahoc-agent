@@ -14,7 +14,9 @@ npm run catalog
 npm run dev
 ```
 
-Mở `http://localhost:3000`. Để kiểm tra production:
+Mở `http://localhost:3000`. Để dùng local như ứng dụng thông thường, chạy `npm run local` (tự build rồi mở server ở port 3000). Xem [hướng dẫn local và lỗi CSP/hydration](docs/LOCAL.md).
+
+Để kiểm tra production:
 
 ```bash
 npm test
